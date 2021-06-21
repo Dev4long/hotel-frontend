@@ -1,32 +1,18 @@
 import React from 'react';
-import BookedRoomForm from './BookedRoomForm'
 
 
-class RoomCard extends React.Component{
+class MyRoomCard extends React.Component{
 
-    state = {
-        bookedRooms:[], 
-        roomForm: false
-    }
     
-    // handleRoomBooking = () => {
-    //     let newBookedRoomArray = [...this.state.bookedRooms, roomObj]
-    //     this.setState({
-    //         bookedRooms: newBookedRoomArray
-    //     })
-    // }
-
-    handleRoomForm = () => {
-        this.setState({
-            roomForm: !this.state.roomForm
-              })
-    }
-
+  
+  
+  
     render() {
     
-
+    
       return (
       <div>
+         <h2>Rooms</h2>
          <h3>{this.props.rooms.name}</h3>
          <br></br>
          <img alt="rooms" src={this.props.rooms.image}/>
@@ -48,18 +34,11 @@ class RoomCard extends React.Component{
          <h5>Balcony:{this.props.rooms.balcony ? "✅": "❌"}</h5>
         
          <h5>{this.props.rooms.bed_size} sized bed</h5>
-         <button onClick={this.handleRoomForm}>Book this room</button>
-         {this.state.roomForm ? <BookedRoomForm room = {this.props.rooms}/> :null}
         
-         
-         {/* <input type="checkbox" value={this.props.rooms.availability}></input> */}
-         
-
-
       </div>
     )
   }
   }
   
-  export default  RoomCard;
+  export default  MyRoomCard;
   

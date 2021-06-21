@@ -13,6 +13,7 @@ class AllHotelsContainer extends React.Component{
       return (
       <div>
           {this.props.hotels.map(hotels => {return <HotelCard hotels={hotels} key={hotels.id}/>})}
+           
       </div>
     )
   }

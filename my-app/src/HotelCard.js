@@ -1,16 +1,29 @@
 import React from 'react';
+import RoomCard from './RoomCard'
 
 
 class HotelCard extends React.Component{
 
+    state = {
+       rooms: this.props.hotels.rooms,
+       showRooms: false
+    }
+
+    handleShowRoom = () => {
+        this.setState({
+            showRooms: !this.state.showRooms
+        })
+    }
     
-    // hotelRooms = () => {
-    //     this.state.hotels.id = this.state.allRooms.all_hotel_id ?  <RoomContainer /> : null
-    //   }
+    // changeRoom = () => {
+    //     this.setState({
+    //         showRooms: !
+    //     })
+    // }
   
   
     render() {
-    
+        // console.log(this.props.hotels.rooms)
     
       return (
       <div>
@@ -22,9 +35,10 @@ class HotelCard extends React.Component{
          <br></br>
          <h5>{this.props.hotels.address}</h5>
          <br></br>
-         <h5>Rating:{this.props.hotels.rating}</h5>
-         <button>Check this hotels availabile rooms</button>
-
+         <h5>Rating:{this.props.hotels.rating}⭐</h5>
+         {/* {this.state.rooms.map(rooms => {return <RoomCard rooms={rooms} key={rooms.id}/>})} */}
+         <button onClick={() => this.handleShowRoom()}>Check this hotels rooms</button>
+         {this.state.showRooms ? this.state.rooms.map(rooms => {return <RoomCard rooms={rooms} key={rooms.id}/>}) : null}
 
       </div>
     )
