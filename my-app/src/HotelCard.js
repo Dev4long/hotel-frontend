@@ -38,7 +38,7 @@ class HotelCard extends React.Component{
          <h5>Rating:{this.props.hotels.rating}⭐</h5>
          {/* {this.state.rooms.map(rooms => {return <RoomCard rooms={rooms} key={rooms.id}/>})} */}
          <button onClick={() => this.handleShowRoom()}>Check this hotels rooms</button>
-         {this.state.showRooms ? this.state.rooms.map(rooms => {return <RoomCard rooms={rooms} key={rooms.id}/>}) : null}
+         {this.state.showRooms ? this.state.rooms.map(rooms => {return <RoomCard rooms={rooms} key={rooms.id} addRoom={this.props.addRoom} clientObject={this.props.clientObject} />}) : null}
 
       </div>
     )

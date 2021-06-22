@@ -49,7 +49,7 @@ class RoomCard extends React.Component{
         
          <h5>{this.props.rooms.bed_size} sized bed</h5>
          <button onClick={this.handleRoomForm}>Book this room</button>
-         {this.state.roomForm ? <BookedRoomForm room = {this.props.rooms}/> :null}
+         {this.state.roomForm ? <BookedRoomForm room = {this.props.rooms}  addRoom={this.props.addRoom} clientObject={this.props.clientObject} /> :null}
         
          
          {/* <input type="checkbox" value={this.props.rooms.availability}></input> */}

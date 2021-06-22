@@ -8,32 +8,33 @@ function BookedRoomForm(props) {
     let [selectedDate1, setSelectedDate1] = useState(null);
     let [selectedDate2, setSelectedDate2] = useState(null);
     
-    // let handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     fetch('http://localhost:3000/stays', {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-type": "Application/json"
-    //       },
-    //       body: JSON.stringify({
+    let handleSubmit = (e) => {
+        e.preventDefault()
+        fetch('https://cors-anywhere.herokuapp.com/http://localhost:3000/api/v1/stays', {
+          method: "POST",
+          headers: {
+            "Content-type": "Application/json"
+          },
+          body: JSON.stringify({
+              user_id: props.clientObject.id,
+              room_id: props.room.id,
+              start_date: selectedDate1,
+              end_date: selectedDate2
+          })
+        })
+          .then(res => res.json())
+          .then(newRoom => console.log(newRoom))
+        //     {
             
-    //       })
-    //     })
-    //       .then(res => res.json())
-    //       .then(newSession => {
-    //         props.addSession(newSession)
-    //         console.log(newSession)
-    //         setDescription("")
-    //         setSelectedDate("")
-    //         onChange("")
-    //         setDurationPrice("")
-    //         alert("Session booked! Happy Training.")
-    //       })
-    // }
+        //     setSelectedDate1("")
+        //     setSelectedDate2("")
+        //     alert("Room booked!")
+        //   })
+    }
   
      return (
       <div>
-          <form>
+          <form onSubmit={handleSubmit}>
        <strong>Select a start date:</strong>
             <DatePicker 
             selected={selectedDate1}

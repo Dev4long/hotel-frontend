@@ -22,15 +22,8 @@ class App extends React.Component{
       hotels: hotels
     })
     )
-
-  //   fetch('http://localhost:3000/api/v1/users')
-  //   .then(res => res.json())
-  //   .then(rooms => console.log(rooms.stays))
-  // }
-  // this.setState({
-  //   myRooms: rooms.stays})  
-  // )
   }
+  
   
   clientLogin = (clientObj) => {
     this.setState({myRooms: clientObj.rooms})
@@ -49,6 +42,12 @@ class App extends React.Component{
     this.setState({showMyRooms: !this.state.showMyRooms})
   }
 
+  addRoom = (roomObj) => {
+    let newRoomArray = [...this.state.myRooms,roomObj]
+    this.setState({myRooms: newRoomArray})
+    console.log(newRoomArray)
+  }
+
   render() {
   
    
@@ -61,7 +60,7 @@ class App extends React.Component{
     {this.state.clientObject.id > 0 ?  null :<LoginForm clientLogin={this.clientLogin} clientObject={this.state.clientObject}/>}
     {this.state.showMyRooms ? <MyRoomsContainer myRooms={this.state.myRooms} clientObject={this.state.clientObject} /> : null}
     <h1>Pick Your Hotel</h1>
-    <AllHotelsContainer hotels={this.state.hotels} />
+    <AllHotelsContainer clientObject={this.state.clientObject} addRoom={this.addRoom} hotels={this.state.hotels} />
     </div>
   )
    

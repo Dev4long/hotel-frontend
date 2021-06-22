@@ -11,24 +11,24 @@ class LoginForm extends Component {
         registerAge: null
     }
 
-    handleRegister = (e) => {
-        e.preventDefault()
-        fetch('http://localhost:3000/users', {
-          method: "POST",
-          headers: {
-            "Content-type": "Application/json"
-          },
-          body: JSON.stringify({
-           name: this.state.registerName,
-          })
-     })
-          .then(
-             this.setState({registerName:""}),
-             alert("You've just embarked on your journey to GREATNESS!!!")
-          )
+    // handleRegister = (e) => {
+    //     e.preventDefault()
+    //     fetch('http://localhost:3000/users', {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-type": "Application/json"
+    //       },
+    //       body: JSON.stringify({
+    //        name: this.state.registerName,
+    //       })
+    //  })
+    //       .then(
+    //          this.setState({registerName:""}),
+    //          alert("You've just embarked on your journey to GREATNESS!!!")
+    //       )
 
           
-    }
+    // }
     
         
     handleLogin = (e) => {
