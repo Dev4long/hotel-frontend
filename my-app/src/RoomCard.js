@@ -22,11 +22,15 @@ class RoomCard extends React.Component{
               })
     }
 
+    // showStayDate = () => {
+    //     if (this.props.rooms.id === this.props.stays)}
+
     render() {
     
 
       return (
       <div>
+          <button>Check booked date</button>
          <h3>{this.props.rooms.name}</h3>
          <br></br>
          <img alt="rooms" src={this.props.rooms.image}/>

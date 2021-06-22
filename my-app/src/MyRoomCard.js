@@ -1,4 +1,5 @@
 import React from 'react';
+import MyStayCard from './MyStayCard'
 
 
 class MyRoomCard extends React.Component{
@@ -16,6 +17,7 @@ class MyRoomCard extends React.Component{
          <h3>{this.props.rooms.name}</h3>
          <br></br>
          <img alt="rooms" src={this.props.rooms.image}/>
+         
          <br></br>
          <h5>costs {this.props.rooms.price}$ per night</h5>
 

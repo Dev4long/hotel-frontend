@@ -10,7 +10,7 @@ function BookedRoomForm(props) {
     
     let handleSubmit = (e) => {
         e.preventDefault()
-        fetch('https://cors-anywhere.herokuapp.com/http://localhost:3000/api/v1/stays', {
+        fetch('http://localhost:3000/api/v1/stays', {
           method: "POST",
           headers: {
             "Content-type": "Application/json"
@@ -23,13 +23,11 @@ function BookedRoomForm(props) {
           })
         })
           .then(res => res.json())
-          .then(newRoom => console.log(newRoom))
-        //     {
-            
-        //     setSelectedDate1("")
-        //     setSelectedDate2("")
-        //     alert("Room booked!")
-        //   })
+          .then(newRoom => {props.addRoom(newRoom)
+            setSelectedDate1("")
+            setSelectedDate2("")
+            alert("Room booked!")
+          })
     }
   
      return (
