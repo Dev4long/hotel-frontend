@@ -53,7 +53,7 @@ function BookedRoomForm(props) {
              <input 
                 type="submit" 
                 name="submit" 
-                value="Book a this room" 
+                value="Save booked date" 
                 className="submit"
             />
             

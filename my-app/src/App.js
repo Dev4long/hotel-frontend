@@ -23,18 +23,19 @@ class App extends React.Component{
       hotels: hotels
     })
     )
-    fetch('http://localhost:3000/api/v1/stays')
-    .then(res => res.json())
-    .then(stays => this.setState({
-      stays: stays
-    })
-    )
+    // fetch('http://localhost:3000/api/v1/stays')
+    // .then(res => res.json())
+    // .then(stays => this.setState({
+    //   stays: stays
+    // })
+    // )
   }
   
   
   clientLogin = (clientObj) => {
-    this.setState({myRooms: clientObj})
+    this.setState({myRooms: clientObj.rooms})
     this.setState({clientObject: clientObj})
+    this.setState({stays: clientObj.stays})
     console.log(this.state.clientObject)
     console.log(this.state.myRooms)
     }
@@ -50,14 +51,17 @@ class App extends React.Component{
   }
 
   addRoom = (roomObj) => {
-    let newRoomArray = [...this.state.myRooms.rooms,roomObj]
+    let newRoomArray = [...this.state.myRooms,roomObj.room]
     this.setState({myRooms: newRoomArray})
-    console.log(newRoomArray)
+    let newStayArray = [...this.state.stays,roomObj]
+    this.setState({stays: newStayArray})
+    // console.log(newStayArray)
   }
 
   render() {
   
-   
+   console.log(this.state.myRooms)
+   console.log(this.state.stays)
   
     return (
     <div>
@@ -65,9 +69,9 @@ class App extends React.Component{
     <br></br>
     {this.state.clientObject.id > 0 ? <button onClick={this.handleShowMyRooms}>Display my rooms</button>: null}
     {this.state.clientObject.id > 0 ?  null :<LoginForm clientLogin={this.clientLogin} clientObject={this.state.clientObject}/>}
-    {this.state.showMyRooms ? <MyRoomsContainer  myRooms={this.state.myRooms} clientObject={this.state.clientObject} /> : null}
+    {this.state.showMyRooms ? <MyRoomsContainer  myRooms={this.state.myRooms} clientObject={this.state.clientObject} stays={this.state.stays} /> : null}
     <h1>Pick Your Hotel</h1>
-    <AllHotelsContainer clientObject={this.state.clientObject} addRoom={this.addRoom} hotels={this.state.hotels} />
+    <AllHotelsContainer clientObject={this.state.clientObject} addRoom={this.addRoom} hotels={this.state.hotels} myRooms={this.state.myRooms} />
     </div>
   )
    

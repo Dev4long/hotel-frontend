@@ -9,28 +9,19 @@ class RoomCard extends React.Component{
         roomForm: false
     }
     
-    // handleRoomBooking = () => {
-    //     let newBookedRoomArray = [...this.state.bookedRooms, roomObj]
-    //     this.setState({
-    //         bookedRooms: newBookedRoomArray
-    //     })
-    // }
-
+   
     handleRoomForm = () => {
         this.setState({
             roomForm: !this.state.roomForm
               })
     }
 
-    // showStayDate = () => {
-    //     if (this.props.rooms.id === this.props.stays)}
 
     render() {
     
-
+      // let RoomObject = this.props.myRooms.filter(room  => room.id === this.props.rooms.id)
       return (
       <div>
-          <button>Check booked date</button>
          <h3>{this.props.rooms.name}</h3>
          <br></br>
          <img alt="rooms" src={this.props.rooms.image}/>

@@ -12,7 +12,7 @@ class AllHotelsContainer extends React.Component{
     
       return (
       <div>
-          {this.props.hotels.map(hotels => {return <HotelCard hotels={hotels} key={hotels.id} addRoom={this.props.addRoom} clientObject={this.props.clientObject}/>})}
+          {this.props.hotels.map(hotels => {return <HotelCard hotels={hotels} key={hotels.id} addRoom={this.props.addRoom} clientObject={this.props.clientObject} myRooms={this.props.myRooms}/>})}
            
       </div>
     )
