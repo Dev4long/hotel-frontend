@@ -74,19 +74,11 @@ class App extends React.Component {
   }
 
   addRoom = (roomObj) => {
-<<<<<<< HEAD
     let newRoomArray = [...this.state.myRooms, roomObj.room]
     this.setState({ myRooms: newRoomArray })
     let newStayArray = [...this.state.stays, roomObj]
     this.setState({ stays: newStayArray })
-    // console.log(newStayArray)
-=======
-    let newRoomArray = [...this.state.myRooms,roomObj.room]
-    this.setState({myRooms: newRoomArray})
-    let newStayArray = [...this.state.stays,roomObj]
-    this.setState({stays: newStayArray})
     console.log(newStayArray)
->>>>>>> 0ad87b39184766f6a7d00f25efefc868ab2280b4
   }
 
   logOut = () => {
@@ -94,17 +86,10 @@ class App extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
 
-    console.log(this.state.myRooms)
+    //  console.log(this.state.myRooms)
     console.log(this.state.stays)
 
-=======
-  
-  //  console.log(this.state.myRooms)
-   console.log(this.state.stays)
-  
->>>>>>> 0ad87b39184766f6a7d00f25efefc868ab2280b4
     return (
       <div>
         <BrowserRouter>
