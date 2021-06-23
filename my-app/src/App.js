@@ -68,12 +68,12 @@ class App extends React.Component{
     this.setState({myRooms: newRoomArray})
     let newStayArray = [...this.state.stays,roomObj]
     this.setState({stays: newStayArray})
-    // console.log(newStayArray)
+    console.log(newStayArray)
   }
 
   render() {
   
-   console.log(this.state.myRooms)
+  //  console.log(this.state.myRooms)
    console.log(this.state.stays)
   
     return (
