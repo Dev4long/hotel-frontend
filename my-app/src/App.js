@@ -23,8 +23,14 @@ class App extends React.Component{
       hotels: hotels
     })
     )
+  //   fetch('http://localhost:3000/api/v1/stays')
+  //   .then(res => res.json())
+  //   .then(stays => this.setState({
+  //     stays: stays
+  //   })
+  //   )
+  // }
   }
-    
     deleteRoom = (roomID) => {
     let deletedRoomsArr = this.state.myRooms.filter(room => room.id !== roomID)
 
@@ -68,12 +74,12 @@ class App extends React.Component{
     this.setState({myRooms: newRoomArray})
     let newStayArray = [...this.state.stays,roomObj]
     this.setState({stays: newStayArray})
-    console.log(newStayArray)
+   
   }
 
   render() {
   
-  //  console.log(this.state.myRooms)
+  
    console.log(this.state.stays)
   
     return (
