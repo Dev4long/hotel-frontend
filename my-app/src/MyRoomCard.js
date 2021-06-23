@@ -15,8 +15,8 @@ class MyRoomCard extends React.Component{
       let staysObject = this.props.stays.filter(stay  => stay.room_id === this.props.room.id)
       // <h3>{stays.start_date}</h3>
       //    <h3>{stays.end_date}</h3>
-      console.log(staysObject[0].end_date)
-      console.log(this.props.room)
+      // console.log(staysObject[0].end_date)
+      // console.log(this.props.room)
       
       return (
       <div>
