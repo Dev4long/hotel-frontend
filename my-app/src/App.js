@@ -23,13 +23,26 @@ class App extends React.Component{
       hotels: hotels
     })
     )
-    // fetch('http://localhost:3000/api/v1/stays')
-    // .then(res => res.json())
-    // .then(stays => this.setState({
-    //   stays: stays
-    // })
-    // )
   }
+    
+    deleteRoom = (roomID) => {
+    let deletedRoomsArr = this.state.myRooms.filter(room => room.id !== roomID)
+
+    fetch(`http://localhost:3000/api/v1/rooms/${roomID}`,{
+    method: "DELETE"
+    })
+    .then(res => res.json())
+    .then(() => {
+    this.setState({
+     myRooms: deletedRoomsArr})
+     alert("Room successfully deleted")
+    })
+   }
+  
+  
+
+  
+
   
   
   clientLogin = (clientObj) => {
@@ -69,13 +82,12 @@ class App extends React.Component{
     <br></br>
     {this.state.clientObject.id > 0 ? <button onClick={this.handleShowMyRooms}>Display my rooms</button>: null}
     {this.state.clientObject.id > 0 ?  null :<LoginForm clientLogin={this.clientLogin} clientObject={this.state.clientObject}/>}
-    {this.state.showMyRooms ? <MyRoomsContainer  myRooms={this.state.myRooms} clientObject={this.state.clientObject} stays={this.state.stays} /> : null}
+    {this.state.showMyRooms ? <MyRoomsContainer  myRooms={this.state.myRooms} clientObject={this.state.clientObject} stays={this.state.stays} deleteRoom={this.deleteRoom}/> : null}
     <h1>Pick Your Hotel</h1>
     <AllHotelsContainer clientObject={this.state.clientObject} addRoom={this.addRoom} hotels={this.state.hotels} myRooms={this.state.myRooms} />
     </div>
-  )
-   
-}
+    );
+  }
 }
 
 export default App;

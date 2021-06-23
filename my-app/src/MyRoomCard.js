@@ -45,6 +45,7 @@ class MyRoomCard extends React.Component{
          <h5>Balcony:{this.props.room.balcony ? "✅": "❌"}</h5>
         
          <h5>{this.props.room.bed_size} sized bed</h5>
+         <button onClick={() => this.props.deleteRoom(this.props.room.id)}>Delete this session</button>
         
       </div>
     )

@@ -18,7 +18,7 @@ class MyRoomsContainer extends React.Component{
       <div>
          {this.props.myRooms.length <= 0 ? <h2 className="rooms">No current booked rooms</h2> : <h2 className="rooms">Your booked room details</h2>}
           
-         {this.props.myRooms.map(room => {return <MyRoomCard room={room} key={room.id} stays={this.props.stays}/>})}
+         {this.props.myRooms.map(room => {return <MyRoomCard room={room} key={room.id} stays={this.props.stays} deleteRoom={this.props.deleteRoom}/>})}
          {/* {this.props.myRooms.stays.map(stays => {return <MyStayCard stays={stays} key={stays.id} />})} */}
          
          {/* {this.props.myRooms.stays.map(stays => {return <MyStayCard stays={stays} key={stays.id} stays={this.props.stays}/>})} */}
