@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import React from 'react';
 import AllHotelsContainer from './AllHotelsContainer';
-import LoginForm from './LoginForm';
+// import LoginForm from './LoginForm';
 import MyRoomsContainer from './MyRoomsContainer';
 import Signup from './Signup'
 import Login from './Login'
@@ -26,15 +26,17 @@ class App extends React.Component {
         "Authorization": `Bearer ${localStorage.token}`
       }
     })
-    )
-  //   fetch('http://localhost:3000/api/v1/stays')
-  //   .then(res => res.json())
-  //   .then(stays => this.setState({
-  //     stays: stays
-  //   })
-  //   )
-  // }
+      .then(res => res.json())
+      .then(hotels => this.setState({
+        hotels: hotels
+      })
+      )
   }
+
+  
+    
+  
+  
     deleteRoom = (roomID) => {
     let deletedRoomsArr = this.state.myRooms.filter(room => room.id !== roomID)
 
@@ -52,18 +54,24 @@ class App extends React.Component {
 
 
 
+//   fetch('http://localhost:3000/api/v1/stays')
+  //   .then(res => res.json())
+  //   .then(stays => this.setState({
+  //     stays: stays
+  //   })
+  //   )
+  // }
 
 
-
-
-  clientLogin = (clientObj) => {
-    this.setState({ myRooms: clientObj.rooms })
-    this.setState({ clientObject: clientObj })
-    this.setState({ stays: clientObj.stays })
-    console.log(this.state.clientObject)
-    console.log(this.state.myRooms)
+ 
+  clientLogin = (user) => {
+    this.setState({ myRooms: user.rooms })
+    this.setState({ clientObject: user })
+    this.setState({ stays: user.stays })
+    
   }
 
+  
   // logOut = () => {
   //   this.setState({ clientObject: [] })
   //   this.setState({ mySessions: [] })
@@ -88,15 +96,16 @@ class App extends React.Component {
 
   render() {
   
-  
-   console.log(this.state.stays)
+    console.log(this.state.clientObject)
+    console.log(this.state.myRooms)
+    console.log(this.state.stays)
   
     return (
       <div>
         <BrowserRouter>
           <Switch>
             <Route path="/login">
-              <Login />
+              <Login login={this.clientLogin} myRooms={this.state.myRooms} stays={this.state.stays} clientObject={this.state.clientObject}/>
             </Route>
             <Route path="/signup">
               <Signup />
@@ -107,10 +116,10 @@ class App extends React.Component {
         {this.state.clientObject.id > 0 ? <button onClick={this.logOut}>Logout</button> : null}
         <br></br>
         {this.state.clientObject.id > 0 ? <button onClick={this.handleShowMyRooms}>Display my rooms</button> : null}
-        {this.state.clientObject.id > 0 ? null : <LoginForm clientLogin={this.clientLogin} clientObject={this.state.clientObject} />}
+        {/* {this.state.clientObject.id > 0 ? null : <LoginForm clientLogin={this.clientLogin} clientObject={this.state.clientObject} />} */}
         {this.state.showMyRooms ? <MyRoomsContainer myRooms={this.state.myRooms} clientObject={this.state.clientObject} stays={this.state.stays} deleteRoom={this.deleteRoom} /> : null}
         <h1>Pick Your Hotel</h1>
-        <AllHotelsContainer clientObject={this.state.clientObject} addRoom={this.addRoom} hotels={this.state.hotels} myRooms={this.state.myRooms} />
+        {this.state.clientObject.id > 0 ? <AllHotelsContainer clientObject={this.state.clientObject} addRoom={this.addRoom} hotels={this.state.hotels} myRooms={this.state.myRooms} /> : null}
       </div>
     );
   }
