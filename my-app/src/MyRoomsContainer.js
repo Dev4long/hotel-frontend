@@ -11,14 +11,14 @@ class MyRoomsContainer extends React.Component {
 
   render() {
 
-    console.log(this.props.myRooms)
-    console.log(this.props.stays)
+    // console.log(this.props.myRooms)
+    // console.log(this.props.stays)
 
     return (
       <div>
         {this.props.myRooms.length <= 0 ? <h2 className="rooms">No current booked rooms</h2> : <h2 className="rooms">Your booked room details</h2>}
 
-        {this.props.myRooms.map(room => { return <MyRoomCard room={room} key={room.id} stays={this.props.stays} deleteRoom={this.props.deleteRoom} deleteStay={this.props.deleteStay} /> })}
+        {this.props.myRooms.map(room => { return <MyRoomCard room={room} key={room.id} stays={this.props.stays} myRooms={this.props.myRooms} deleteRoom={this.props.deleteRoom} deleteStay={this.props.deleteStay} /> })}
         {/* {this.props.myRooms.stays.map(stays => {return <MyStayCard stays={stays} key={stays.id} />})} */}
 
         {/* {this.props.myRooms.stays.map(stays => {return <MyStayCard stays={stays} key={stays.id} stays={this.props.stays}/>})} */}
@@ -29,4 +29,4 @@ class MyRoomsContainer extends React.Component {
   }
 }
 
-export default MyRoomsContainer;
+export default MyRoomsContainer

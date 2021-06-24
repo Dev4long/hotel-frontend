@@ -7,25 +7,32 @@ class MyRoomCard extends React.Component {
 
 
 
-
+  // .map(stay => stay.id))
   render() {
 
 
 
-    let staysObject = (stay) => this.props.stays.filter(stay => stay.room_id === this.props.room.id)
+    let staysObject = (this.props.stays.filter(stay => stay.room_id === this.props.room.id))
+    let staysObject1 = (this.props.stays.filter(stay => stay.room_id === this.props.room.id).map(stay => stay))
     // <h3>{stays.start_date}</h3>
     //    <h3>{stays.end_date}</h3>
     // console.log(staysObject[0].end_date)
     // console.log(this.props.room)
-    console.log(staysObject)
+    // console.log(staysObject)
+    
+    console.log("hello", this.props.stays)
+    console.log("good",staysObject)
+    // console.log(staysObject1)
+
 
     return (
+      
       <div>
         <h2>Rooms</h2>
         <h3>{this.props.room.name}</h3>
         <br></br>
-        {/* <h3>Start date: {staysObject[0].start_date.slice(0, 10)}</h3>
-        <h3>End date: {staysObject[0].end_date.slice(0, 10)}</h3> */}
+        <h3>Start date: {staysObject1[0].start_date.slice(0, 10)}</h3>
+        <h3>End date: {staysObject1[0].end_date.slice(0, 10)}</h3>
         <img alt="rooms" src={this.props.room.image} />
 
         <br></br>
@@ -46,7 +53,7 @@ class MyRoomCard extends React.Component {
         <h5>Balcony:{this.props.room.balcony ? "✅" : "❌"}</h5>
 
         <h5>{this.props.room.bed_size} sized bed</h5>
-        <button onClick={() => this.props.deleteStay(this.props.stays[0].id)}>Delete this session</button>
+        <button onClick={() => this.props.deleteStay(staysObject)}>Delete this session</button>
         {/* onClick={() => this.props.deleteRoom(this.props.room.id) */}
       </div>
     )

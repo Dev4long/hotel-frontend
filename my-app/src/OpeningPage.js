@@ -16,13 +16,13 @@ export default class Opening extends React.Component {
                 <br></br>
                 <br></br>
                 <Link to= "/login">
-                <button>LogIn</button>
+                <button>LogIn/signUp</button>
                 </Link>
                 <br></br>
                 <br></br>
-                <Link to= "/signup">
+                {/* <Link to= "/signup">
                 <button class="btn btn-primary mr-1">Signup</button>
-                </Link>
+                </Link> */}
                 <br></br>
                 <br></br>
                 <Link to= "/hotels">

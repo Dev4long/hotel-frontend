@@ -6,6 +6,7 @@ import MyRoomsContainer from './MyRoomsContainer';
 import Signup from './Signup'
 import Login from './Login'
 import OpeningPage from './OpeningPage'
+import SearchBar from './SearchBar'
 
 class App extends React.Component {
 
@@ -16,6 +17,7 @@ class App extends React.Component {
     userInfo: [],
     showMyRooms: false,
     stays: [],
+    sorted: "none"
   }
 
 
@@ -95,9 +97,13 @@ class App extends React.Component {
   //       alert("Room successfully deleted")
   //     })
   // }
-  deleteStay = (stayID) => {
-    let deletedStaysArr = this.state.stays.filter(stay => stay.id !== stayID)
-    fetch(`http://localhost:3000/api/v1/stays/${stayID}`, {
+  deleteStay = (stayObj) => {
+    console.log("stayObj", stayObj)
+    let newStayObj = stayObj[0]
+    let deletedStaysArr = this.state.stays.filter(stay => stay.id !== newStayObj.id)
+    let deletedRoomsArr = this.state.myRooms.filter(room => room.id !== newStayObj.room_id)
+    console.log("delete", deletedRoomsArr)
+    fetch(`http://localhost:3000/api/v1/stays/${newStayObj.id}`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${localStorage.token}`,
@@ -108,6 +114,7 @@ class App extends React.Component {
       .then(() => {
         this.setState({
           stays: deletedStaysArr,
+          myRooms: deletedRoomsArr
         })
 
       })
@@ -160,6 +167,15 @@ class App extends React.Component {
     stays: []})
   }
 
+
+  sortRatings = (sortType) => {
+    this.setState({
+      sorted: sortType,
+      hotels: this.state.hotels.sort(
+      (a,b) => sortType === "Rating" ? b.rating - a.rating : a.name.localeCompare(b.name) )
+    })
+  }
+
   render() {
   
     // console.log(this.state.clientObject)
@@ -174,18 +190,21 @@ class App extends React.Component {
           <Switch>
             <Route path="/login">
               <Login login={this.login} />
+              <Signup signup={this.signup} />
               {this.state.userInfo.id >= 1 ? <button onClick={this.logOut}>Logout</button>:null}
         <br></br>
         <br></br>
         {this.state.userInfo.id > 0 ? <button onClick={this.handleShowMyRooms}>Display my rooms</button> : null}
         {this.state.showMyRooms ? <MyRoomsContainer myRooms={this.state.myRooms} userInfo={this.state.userInfo} stays={this.state.stays} deleteRoom={this.deleteRoom} deleteStay={this.deleteStay} /> : null}
         {this.state.userInfo.id >= 1 ? <h1>Pick Your Hotel</h1> :null}
+        {this.state.userInfo.id >= 1 ? <SearchBar sortRatings ={this.sortRatings} sortedType={this.state.sorted}/> : null}
         {this.state.userInfo.id >= 1 ? <AllHotelsContainer userInfo={this.state.userInfo} addRoom={this.addRoom} hotels={this.state.hotels} myRooms={this.state.myRooms}/> :null }
             </Route>
-            <Route path="/signup">
+            {/* <Route path="/signup">
               <Signup signup={this.signup} />
-              </Route>
+              </Route> */}
             <Route path="/hotels">
+            <SearchBar sortRatings ={this.sortRatings} sortedType={this.state.sorted}/>
             <AllHotelsContainer userInfo={this.state.userInfo} addRoom={this.addRoom} hotels={this.state.hotels} myRooms={this.state.myRooms} />
             </Route>
             <Route path = "/" component={OpeningPage}/>
