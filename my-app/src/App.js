@@ -13,7 +13,7 @@ class App extends React.Component {
   state = {
     hotels: [],
     myRooms: [],
-    clientObject: [],
+    userInfo: [],
     showMyRooms: false,
     stays: [],
   }
@@ -34,20 +34,85 @@ class App extends React.Component {
       )
   }
 
+  login = (e) => {
+    e.preventDefault()
+
+    fetch("http://localhost:3000/api/v1/login", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${localStorage.token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: e.target[0].value,
+        password: e.target[1].value
+      })
+    })
+      .then(res => res.json())
+      .then(userInfo => {
+        localStorage.token = userInfo.token
+        if (userInfo.token) {
+          this.setState({
+            userInfo: userInfo.user,
+            myRooms: userInfo.user.rooms,
+            stays: userInfo.user.stays
+          })
+          console.log(userInfo.user)
+        }
+      })
+  }
+
+  signup = (e) => {
+    e.preventDefault()
+
+    fetch("http://localhost:3000/api/v1/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: e.target[0].value,
+        password: e.target[1].value
+      })
+    })
+      .then(res => res.json())
+      .then(console.log)
+  }
+
   deleteRoom = (roomID) => {
     let deletedRoomsArr = this.state.myRooms.filter(room => room.id !== roomID)
-
     fetch(`http://localhost:3000/api/v1/rooms/${roomID}`, {
-      method: "DELETE"
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${localStorage.token}`,
+        "Content-Type": "application/json"
+      },
     })
       .then(res => res.json())
       .then(() => {
         this.setState({
-          myRooms: deletedRoomsArr
+          myRooms: deletedRoomsArr,
         })
         alert("Room successfully deleted")
       })
   }
+  // deleteStay = (stayID) => {
+  //   let deletedStaysArr = this.state.stays.filter(stay => stay.id !== stayID)
+  //   fetch(`http://localhost:3000/api/v1/stays/${stayID}`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       "Authorization": `Bearer ${localStorage.token}`,
+  //       "Content-Type": "application/json"
+  //     },
+  //   })
+  //     .then(res => res.json())
+  //     .then(() => {
+  //       this.setState({
+  //         stays: deletedStaysArr,
+  //       })
+
+  //     })
+  // }
 
 
 
@@ -55,13 +120,13 @@ class App extends React.Component {
 
 
 
-  clientLogin = (clientObj) => {
-    this.setState({ myRooms: clientObj.rooms })
-    this.setState({ clientObject: clientObj })
-    this.setState({ stays: clientObj.stays })
-    console.log(this.state.clientObject)
-    console.log(this.state.myRooms)
-  }
+  // clientLogin = (clientObj) => {
+  //   this.setState({ myRooms: clientObj.rooms })
+  //   this.setState({ clientObject: clientObj })
+  //   this.setState({ stays: clientObj.stays })
+  //   console.log(this.state.clientObject)
+  //   console.log(this.state.myRooms)
+  // }
 
   // logOut = () => {
   //   this.setState({ clientObject: [] })
@@ -90,26 +155,27 @@ class App extends React.Component {
     //  console.log(this.state.myRooms)
     console.log(this.state.stays)
 
+
     return (
       <div>
         <BrowserRouter>
           <Switch>
             <Route path="/login">
-              <Login />
+              <Login login={this.login} />
             </Route>
             <Route path="/signup">
-              <Signup />
+              <Signup signup={this.signup} />
             </Route>
           </Switch>
         </BrowserRouter>
         <button onClick={this.logOut}>Logout</button>
-        {this.state.clientObject.id > 0 ? <button onClick={this.logOut}>Logout</button> : null}
+        {this.state.userInfo.id > 0 ? <button onClick={this.logOut}>Logout</button> : null}
         <br></br>
-        {this.state.clientObject.id > 0 ? <button onClick={this.handleShowMyRooms}>Display my rooms</button> : null}
-        {this.state.clientObject.id > 0 ? null : <LoginForm clientLogin={this.clientLogin} clientObject={this.state.clientObject} />}
-        {this.state.showMyRooms ? <MyRoomsContainer myRooms={this.state.myRooms} clientObject={this.state.clientObject} stays={this.state.stays} deleteRoom={this.deleteRoom} /> : null}
+        {this.state.userInfo.id > 0 ? <button onClick={this.handleShowMyRooms}>Display my rooms</button> : null}
+        {/* {this.state.userInfo.id > 0 ? null : <LoginForm clientLogin={this.clientLogin} clientObject={this.state.clientObject} />} */}
+        {this.state.showMyRooms ? <MyRoomsContainer myRooms={this.state.myRooms} userInfo={this.state.userInfo} stays={this.state.stays} deleteRoom={this.deleteRoom} deleteStay={this.deleteStay} /> : null}
         <h1>Pick Your Hotel</h1>
-        <AllHotelsContainer clientObject={this.state.clientObject} addRoom={this.addRoom} hotels={this.state.hotels} myRooms={this.state.myRooms} />
+        <AllHotelsContainer userInfo={this.state.userInfo} addRoom={this.addRoom} hotels={this.state.hotels} myRooms={this.state.myRooms} />
       </div>
     );
   }

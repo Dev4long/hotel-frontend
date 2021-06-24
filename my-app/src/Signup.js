@@ -1,27 +1,27 @@
-const Signup = () => {
+const Signup = (props) => {
 
-    let signUp = (e) => {
-        e.preventDefault()
+    // let signUp = (e) => {
+    //     e.preventDefault()
 
-        fetch("http://localhost:3000/api/v1/users", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: e.target[0].value,
-                password: e.target[1].value
-            })
-        })
-            .then(res => res.json())
-            .then(console.log)
-    }
+    //     fetch("http://localhost:3000/api/v1/users", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //             username: e.target[0].value,
+    //             password: e.target[1].value
+    //         })
+    //     })
+    //         .then(res => res.json())
+    //         .then(console.log)
+    // }
 
 
     return (
         <div>
             <h2>Signup</h2>
-            <form onSubmit={(e) => signUp(e)}>
+            <form onSubmit={(e) => props.signup(e)}>
                 <label>UserName</label>
                 <input name="username" type="text" />
                 <label>Password</label>
