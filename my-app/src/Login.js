@@ -1,13 +1,4 @@
-import React from 'react';
-// import { render } from 'react-dom';
-
-
-
-// const LogIn = () => 
-
-
-
-class Login extends React.Component {
+const Login = (props) => {
 
     // let logIn = (e) => {
     //     e.preventDefault()
@@ -33,43 +24,13 @@ class Login extends React.Component {
     //         })
     // }
     
-    render(){
-
-
-
-
-        let logIn = (e) => {
-            e.preventDefault()
     
-            fetch("http://localhost:3000/api/v1/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    username: e.target[0].value,
-                    password: e.target[1].value
-                })
-            })
-                .then(res => res.json())
-                .then(userInfo => {
-                    localStorage.token = userInfo.token
-                    this.props.myRooms.setState({myRooms: userInfo.user.rooms})
-                    this.setState({stays: userInfo.user.stays})
-                    this.setState({clientObject: userInfo.user})
-                    console.log(userInfo.user)
-                    console.log(this.props.myRooms)
-                    
-                    
-                    // console.log(this.props.login)
-                })
-        }
 
 
     return (
         <div>
-            <h2>LogIn</h2>
-            <form onSubmit={(e) => logIn(e)}>
+            <h2>Login</h2>
+            <form onSubmit={(e) => props.login(e)}>
                 <label>UserName</label>
                 <input name="username" type="text" />
                 <label>Password</label>
@@ -78,7 +39,7 @@ class Login extends React.Component {
             </form>
         </div>
     )
-    }
+    
 }
 
-export default Login;
+export default Login
