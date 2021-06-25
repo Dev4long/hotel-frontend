@@ -13,7 +13,7 @@ class MyRoomCard extends React.Component {
 
 
     let staysObject = (this.props.stays.filter(stay => stay.room_id === this.props.room.id))
-    let staysObject1 = (this.props.stays.map(stay => stay))
+    let staysObject1 = (this.props.stays.filter(stay => stay.room_id === this.props.room.id))
     // <h3>{stays.start_date}</h3>
     //    <h3>{stays.end_date}</h3>
     // console.log(staysObject[0].end_date)
@@ -33,8 +33,8 @@ class MyRoomCard extends React.Component {
         <h2>Rooms</h2>
         <h3>{this.props.room.name}</h3>
         <br></br>
-        <h3>Start date: {staysObject1.start_date} </h3>
-        <h3>End date: {staysObject1.end_date} </h3>
+        <h3>Start date: {staysObject1.map(stay => stay.start_date.slice(0, 10))} </h3>
+        <h3>End date: {staysObject1.map(stay => stay.end_date.slice(0, 10))} </h3>
         <img alt="rooms" src={this.props.room.image} />
 
         <br></br>
