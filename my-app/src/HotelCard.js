@@ -1,6 +1,7 @@
 import React from 'react';
 import RoomCard from './RoomCard'
-
+import { Button, Alert, Card, Container, Row } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 class HotelCard extends React.Component {
 
@@ -27,18 +28,26 @@ class HotelCard extends React.Component {
 
     return (
       <div>
-        <h3>{this.props.hotels.name}</h3>
-        <br></br>
-        <img alt="Hotel" src={this.props.hotels.image} />
-        <br></br>
-        <h5>{this.props.hotels.description}</h5>
-        <br></br>
-        <h5>{this.props.hotels.address}</h5>
-        <br></br>
-        <h5>Rating:{this.props.hotels.rating}⭐</h5>
-        {/* {this.state.rooms.map(rooms => {return <RoomCard rooms={rooms} key={rooms.id}/>})} */}
-        <button onClick={() => this.handleShowRoom()}>Check this hotels rooms</button>
-        {this.state.showRooms ? this.state.rooms.map(rooms => { return <RoomCard rooms={rooms} key={rooms.id} addRoom={this.props.addRoom} userInfo={this.props.userInfo} myRooms={this.props.myRooms}/> }) : null}
+        <Card className="card" style={{ color: "#000", background: "white" }}>
+
+          <Card.Img alt="Hotel" src={this.props.hotels.image} />
+
+          <Card.Body>
+            <Card.Title>{this.props.hotels.name}</Card.Title>
+            <Card.Text>{this.props.hotels.description}</Card.Text>
+
+            <Card.Text>{this.props.hotels.address}</Card.Text>
+
+            <Card.Text>Rating:{this.props.hotels.rating}⭐</Card.Text>
+            {/* {this.state.rooms.map(rooms => {return <RoomCard rooms={rooms} key={rooms.id}/>})} */}
+            <Button onClick={() => this.handleShowRoom()}>Check this hotels rooms</Button>
+          </Card.Body>
+        </Card>
+        <Container>
+        <Row lg={3}>
+        {this.state.showRooms ? this.state.rooms.map(rooms => { return <RoomCard className={"roomCard"} rooms={rooms} key={rooms.id} addRoom={this.props.addRoom} userInfo={this.props.userInfo} myRooms={this.props.myRooms} /> }) : null}
+        </Row>
+        </Container>
 
       </div>
     )

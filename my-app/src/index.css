@@ -5,9 +5,76 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url("https://www.creativefabrica.com/wp-content/uploads/2020/03/06/City-Background-in-a-Beautiful-Afternoon-Graphics-3184593-1.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.card {
+  margin-bottom: 1rem!important;
+    text-align: center;
+    width: 80%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.roomCard {
+  margin-bottom: 1rem!important;
+    text-align: center;
+    width: 70%;
+    height: auto;
+    
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.containerTitle {
+  text-align: center
+}
+
+.sorter {
+  text-align: center
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.greatness {
+  text-align: center
+}
+
+.openingTitle {
+  margin-top: 13%;
+    margin-bottom: .5rem;
+    font-weight: 1000;
+    line-height: 1.2;
+    font-size: xxx-large;
+}
+
+button.btn.btn-primary {
+  background-color: #2e2e30;
+    border-color: #e4b288;
+    text-align: center;
+}
+
+.displayMyRoomsBtn {
+  text-align: center;
+  padding-bottom: 15px
+}
+
+h2.rooms {
+  text-align: center
 }

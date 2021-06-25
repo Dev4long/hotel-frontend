@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { Button, Alert, Card } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 class MyRoomCard extends React.Component {
@@ -19,43 +20,47 @@ class MyRoomCard extends React.Component {
     // console.log(staysObject[0].end_date)
     // console.log(this.props.room)
     // console.log(staysObject)
-    
-    
+
+
     console.log("hello", this.props.stays)
-    console.log("good",staysObject)
+    console.log("good", staysObject)
     // console.log(staysObject1)
 
     // {staysObject1[0].start_date.slice(0, 10)}
     // {staysObject1[0].end_date.slice(0, 10)}
     return (
-      
+
       <div>
-        <h2>Rooms</h2>
-        <h3>{this.props.room.name}</h3>
-        <br></br>
-        <h3>Start date: {staysObject1.map(stay => stay.start_date.slice(0, 10))} </h3>
-        <h3>End date: {staysObject1.map(stay => stay.end_date.slice(0, 10))} </h3>
-        <img alt="rooms" src={this.props.room.image} />
+        <Card className="card" style={{ color: "#000", background: "white" }}>
 
-        <br></br>
-        <h5>costs {this.props.room.price}$ per night</h5>
 
-        <h5>Room availabiltiy {this.props.room.availability ? "✅" : "❌"}</h5>
+          <Card.Img alt="rooms" src={this.props.room.image} />
+          <Card.Body>
+            <Card.Title>{this.props.room.name}</Card.Title>
+            <Card.Text>Start date: {staysObject1.map(stay => stay.start_date.slice(0, 10))} </Card.Text>
+            <Card.Text>End date: {staysObject1.map(stay => stay.end_date.slice(0, 10))} </Card.Text>
 
-        <h4>Ammenities offered with this room package:</h4>
 
-        <h5>Room Service:{this.props.room.room_service ? "✅" : "❌"}</h5>
+            <Card.Text>costs {this.props.room.price}$ per night</Card.Text>
 
-        <h5>Fitness center:{this.props.room.fitness_center ? "✅" : "❌"}</h5>
+            <Card.Text>Room availabiltiy {this.props.room.availability ? "✅" : "❌"}</Card.Text>
 
-        <h5>Pool: {this.props.room.pool ? "✅" : "❌"}</h5>
+            <Card.Title>Ammenities offered with this room package:</Card.Title>
 
-        <h5>Wifi premium:{this.props.room.wifi ? "✅" : "❌"}</h5>
+            <Card.Text>Room Service:{this.props.room.room_service ? "✅" : "❌"}</Card.Text>
 
-        <h5>Balcony:{this.props.room.balcony ? "✅" : "❌"}</h5>
+            <Card.Text>Fitness center:{this.props.room.fitness_center ? "✅" : "❌"}</Card.Text>
 
-        <h5>{this.props.room.bed_size} sized bed</h5>
-        <button onClick={() => this.props.deleteStay(staysObject)}>Delete this Room</button>
+            <Card.Text>Pool: {this.props.room.pool ? "✅" : "❌"}</Card.Text>
+
+            <Card.Text>Wifi premium:{this.props.room.wifi ? "✅" : "❌"}</Card.Text>
+
+            <Card.Text>Balcony:{this.props.room.balcony ? "✅" : "❌"}</Card.Text>
+
+            <Card.Text>{this.props.room.bed_size} sized bed</Card.Text>
+            <Button onClick={() => this.props.deleteStay(staysObject)}>Delete this Room</Button>
+          </Card.Body>
+        </Card>
         {/* onClick={() => this.props.deleteRoom(this.props.room.id) */}
       </div>
     )
