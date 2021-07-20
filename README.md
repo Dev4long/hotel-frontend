@@ -1,1 +1,1 @@
-# hotel-frontend
+Hotel Flatiron allows a user to login and browse different hotels in the NYC area. Once a user finds a hotel they like, they can pick from 3 packages and book that room for however long they'd like. Once booked, they can navigate to their booked rooms page and see what hotel, package, and dates they picked, and also delete any reservations they no longer want.
